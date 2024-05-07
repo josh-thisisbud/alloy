@@ -71,6 +71,10 @@ Main (unreleased)
 - Imported code using `slog` logging will now not panic and replay correctly when logged before the logging 
   config block is initialized. (@mattdurham)
 
+- Fixed an issue with `prometheus.scrape` in which targets that move from one
+  cluster instance to another could have a staleness marker inserted and result
+  in a gap in metrics (@thampiotr)
+
 ### Other changes
 
 - Update `alloy-mixin` to use more specific alert group names (for example,
