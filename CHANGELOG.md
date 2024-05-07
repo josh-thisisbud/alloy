@@ -10,6 +10,9 @@ internal API changes are not present.
 Main (unreleased)
 -----------------
 
+v1.1.0-rc.0
+-----------
+
 ### Features
 
 - (_Public preview_) Add support for setting GOMEMLIMIT based on cgroup setting. (@mattdurham)
@@ -23,6 +26,8 @@ Main (unreleased)
 - (_Public preview_) Introduce `boringcrypto` release assets. BoringCrypto
   builds are publshed for Linux on AMD64 and ARM64 platforms. (@rfratto,
   @mattdurham)
+
+- `otelcol.exporter.loadbalancing`: Add a new `aws_cloud_map` resolver. (@ptodev)
 
 ### Enhancements
 
@@ -68,10 +73,13 @@ Main (unreleased)
   every 15 seconds instead of as soon as data was written to the WAL.
   (@rfratto)
 
-- Imported code using `slog` logging will now not panic and replay correctly when logged before the logging 
+- Imported code using `slog` logging will now not panic and replay correctly when logged before the logging
   config block is initialized. (@mattdurham)
 
-- Fixed an issue with `prometheus.scrape` in which targets that move from one
+- Fix a bug where custom components would not shadow the stdlib. If you have a module whose name conflicts with an stdlib function
+  and if you use this exact function in your config, then you will need to rename your module. (@wildum)
+  
+ - Fixed an issue with `prometheus.scrape` in which targets that move from one
   cluster instance to another could have a staleness marker inserted and result
   in a gap in metrics (@thampiotr)
 
@@ -99,26 +107,26 @@ Main (unreleased)
 
 - Remove setcap for `cap_net_bind_service` to allow alloy to run in restricted environments.
   Modern container runtimes allow binding to unprivileged ports as non-root. (@BlackDex)
-  
+
 - Upgrading from OpenTelemetry v0.96.0 to v0.99.0.
   - `otelcol.processor.batch`: Prevent starting unnecessary goroutines.
     https://github.com/open-telemetry/opentelemetry-collector/issues/9739
   - `otelcol.exporter.otlp`: Checks for port in the config validation for the otlpexporter.
     https://github.com/open-telemetry/opentelemetry-collector/issues/9505
-  - `otelcol.receiver.otlp`: Fix bug where the otlp receiver did not properly respond 
+  - `otelcol.receiver.otlp`: Fix bug where the otlp receiver did not properly respond
     with a retryable error code when possible for http.
     https://github.com/open-telemetry/opentelemetry-collector/pull/9357
   - `otelcol.receiver.vcenter`: Fixed the resource attribute model to more accurately support multi-cluster deployments.
     https://github.com/open-telemetry/opentelemetry-collector-contrib/issues/30879
     For more information on impacts please refer to:
     https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/31113
-    The main impact is that `vcenter.resource_pool.name`, `vcenter.resource_pool.inventory_path`, 
+    The main impact is that `vcenter.resource_pool.name`, `vcenter.resource_pool.inventory_path`,
     and `vcenter.cluster.name` are reported with more accuracy on VM metrics.
   - `otelcol.receiver.vcenter`: Remove the `vcenter.cluster.name` resource attribute from Host resources if the Host is standalone (no cluster).
     https://github.com/open-telemetry/opentelemetry-collector-contrib/issues/32548
   - `otelcol.receiver.vcenter`: Changes process for collecting VMs & VM perf metrics to be more efficient (one call now for all VMs).
     https://github.com/open-telemetry/opentelemetry-collector-contrib/issues/31837
-  - `otelcol.connector.servicegraph`: Added a new `database_name_attribute` config argument to allow users to 
+  - `otelcol.connector.servicegraph`: Added a new `database_name_attribute` config argument to allow users to
     specify a custom attribute name for identifying the database name in span attributes.
     https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/30726
   - `otelcol.connector.servicegraph`: Fix 'failed to find dimensions for key' error from race condition in metrics cleanup.
@@ -152,8 +160,8 @@ Main (unreleased)
   - `otelcol.processor.resourcedetection`: Update to ec2 scraper so that core attributes are not dropped if describeTags returns an error (likely due to permissions).
     https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/30672
 
-v1.0.0 (2024-04-09)
--------------------
+v1.0.0
+------
 
 ### Features
 
