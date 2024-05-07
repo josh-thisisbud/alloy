@@ -21,6 +21,7 @@ type valueCache struct {
 	moduleArguments    map[string]any         // key -> module arguments value
 	moduleExports      map[string]any         // name -> value for the value of module exports
 	moduleChangedIndex int                    // Everytime a change occurs this is incremented
+	scope              *vm.Scope              // scope provides additional context for the nodes in the module
 }
 
 // newValueCache creates a new ValueCache.
@@ -165,7 +166,7 @@ func (vc *valueCache) BuildContext() *vm.Scope {
 	defer vc.mut.RUnlock()
 
 	scope := &vm.Scope{
-		Parent:    nil,
+		Parent:    vc.scope,
 		Variables: make(map[string]interface{}),
 	}
 
