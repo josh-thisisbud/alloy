@@ -10,6 +10,7 @@ import (
 	"github.com/grafana/alloy/internal/component/prometheus"
 	"github.com/grafana/alloy/internal/featuregate"
 	"github.com/grafana/alloy/internal/service/labelstore"
+	"github.com/grafana/alloy/internal/service/xray"
 	lru "github.com/hashicorp/golang-lru/v2"
 	prometheus_client "github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/prometheus/model/exemplar"
@@ -84,6 +85,7 @@ type Component struct {
 	fanout           *prometheus.Fanout
 	exited           atomic.Bool
 	ls               labelstore.LabelStore
+	xray             xray.DebugStreamHandler
 
 	cacheMut sync.RWMutex
 	cache    *lru.Cache[uint64, *labelAndID]
@@ -99,6 +101,12 @@ func New(o component.Options, args Arguments) (*Component, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	xrayService, err := o.GetServiceData(xray.ServiceName)
+	if err != nil {
+		return nil, err
+	}
+
 	data, err := o.GetServiceData(labelstore.ServiceName)
 	if err != nil {
 		return nil, err
@@ -107,6 +115,7 @@ func New(o component.Options, args Arguments) (*Component, error) {
 		opts:  o,
 		cache: cache,
 		ls:    data.(labelstore.LabelStore),
+		xray:  xrayService.(xray.DebugStreamHandler),
 	}
 	c.metricsProcessed = prometheus_client.NewCounter(prometheus_client.CounterOpts{
 		Name: "alloy_prometheus_relabel_metrics_processed",
@@ -259,6 +268,11 @@ func (c *Component) relabel(val float64, lbls labels.Labels) labels.Labels {
 	// Set the cache size to the cache.len
 	// TODO(@mattdurham): Instead of setting this each time could collect on demand for better performance.
 	c.cacheSize.Set(float64(c.cache.Len()))
+
+	if ds := c.xray.GetStream(c.opts.ID); ds != nil {
+		ds(fmt.Sprintf("%s => %s", lbls.String(), relabelled.String()))
+	}
+
 	return relabelled
 }
 

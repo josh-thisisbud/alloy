@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/grafana/alloy/internal/service/labelstore"
+	"github.com/grafana/alloy/internal/service/xray"
 	"github.com/prometheus/client_golang/prometheus"
 	"go.uber.org/atomic"
 
@@ -163,6 +164,8 @@ func (c *Controller) buildComponent(dataPath string, args component.Arguments) (
 			switch name {
 			case labelstore.ServiceName:
 				return labelstore.New(nil, prometheus.DefaultRegisterer), nil
+			case xray.ServiceName:
+				return xray.NewDebugStreamManager(), nil
 			default:
 				return nil, fmt.Errorf("no service named %s defined", name)
 			}
