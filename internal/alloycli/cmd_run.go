@@ -35,6 +35,7 @@ import (
 	otel_service "github.com/grafana/alloy/internal/service/otel"
 	remotecfgservice "github.com/grafana/alloy/internal/service/remotecfg"
 	uiservice "github.com/grafana/alloy/internal/service/ui"
+	"github.com/grafana/alloy/internal/service/xray"
 	"github.com/grafana/alloy/internal/static/config/instrumentation"
 	"github.com/grafana/alloy/internal/usagestats"
 	"github.com/grafana/alloy/syntax/diag"
@@ -272,8 +273,11 @@ func (fr *alloyRun) Run(configPath string) error {
 		return fmt.Errorf("failed to create the remotecfg service: %w", err)
 	}
 
+	xrayService := xray.New()
+
 	uiService := uiservice.New(uiservice.Options{
 		UIPrefix: fr.uiPrefix,
+		Xray:     xrayService.Data().(xray.DebugStreamHandler),
 	})
 
 	otelService := otel_service.New(l)
@@ -292,6 +296,7 @@ func (fr *alloyRun) Run(configPath string) error {
 		MinStability: fr.minStability,
 		Services: []service.Service{
 			httpService,
+			xrayService,
 			uiService,
 			clusterService,
 			otelService,

@@ -11,6 +11,7 @@ import (
 	"github.com/grafana/alloy/internal/featuregate"
 	"github.com/grafana/alloy/internal/service"
 	http_service "github.com/grafana/alloy/internal/service/http"
+	"github.com/grafana/alloy/internal/service/xray"
 	"github.com/grafana/alloy/internal/web/api"
 	"github.com/grafana/alloy/internal/web/ui"
 )
@@ -22,6 +23,7 @@ const ServiceName = "ui"
 // lifetime of the UI service.
 type Options struct {
 	UIPrefix string // Path prefix to host the UI at.
+	Xray     xray.DebugStreamHandler
 }
 
 // Service implements the UI service.
@@ -46,7 +48,7 @@ func (s *Service) Definition() service.Definition {
 	return service.Definition{
 		Name:       ServiceName,
 		ConfigType: nil, // ui does not accept configuration
-		DependsOn:  []string{http_service.ServiceName},
+		DependsOn:  []string{http_service.ServiceName, xray.ServiceName},
 		Stability:  featuregate.StabilityGenerallyAvailable,
 	}
 }
@@ -75,7 +77,7 @@ func (s *Service) Data() any {
 func (s *Service) ServiceHandler(host service.Host) (base string, handler http.Handler) {
 	r := mux.NewRouter()
 
-	fa := api.NewAlloyAPI(host)
+	fa := api.NewAlloyAPI(host, s.opts.Xray)
 	fa.RegisterRoutes(path.Join(s.opts.UIPrefix, "/api/v0/web"), r)
 	ui.RegisterRoutes(s.opts.UIPrefix, r)
 
