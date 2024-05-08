@@ -159,7 +159,7 @@ require (
 	github.com/prometheus/mysqld_exporter v0.14.0
 	github.com/prometheus/node_exporter v1.6.0
 	github.com/prometheus/procfs v0.12.0
-	github.com/prometheus/prometheus v1.99.0
+	github.com/prometheus/prometheus v0.51.2 // a.k.a. v2.51.2
 	github.com/prometheus/snmp_exporter v0.24.1
 	github.com/prometheus/statsd_exporter v0.22.8
 	github.com/richardartoul/molecule v1.0.1-0.20221107223329-32cfee06a052
@@ -272,9 +272,9 @@ require (
 	github.com/AlessandroPomponio/go-gibberish v0.0.0-20191004143433-a2d4156f0396 // indirect
 	github.com/Azure/azure-sdk-for-go v66.0.0+incompatible // indirect
 	github.com/Azure/azure-sdk-for-go/sdk/internal v1.5.2 // indirect
-	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute/v4 v4.2.1 // indirect
+	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute/v5 v5.5.0 // indirect
 	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/monitor/armmonitor v0.10.2 // indirect
-	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/network/armnetwork/v2 v2.2.1 // indirect
+	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/network/armnetwork/v4 v4.3.0 // indirect
 	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resourcegraph/armresourcegraph v0.8.2 // indirect
 	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resources/armresources v1.1.1 // indirect
 	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resources/armsubscriptions v1.2.0 // indirect
@@ -292,6 +292,7 @@ require (
 	github.com/AzureAD/microsoft-authentication-library-for-go v1.2.1 // indirect
 	github.com/BurntSushi/toml v1.2.1 // indirect
 	github.com/ClickHouse/clickhouse-go v1.5.4 // indirect
+	github.com/Code-Hex/go-generics-cache v1.3.1 // indirect
 	github.com/DataDog/sketches-go v1.4.4 // indirect
 	github.com/GehirnInc/crypt v0.0.0-20200316065508-bb7000b8a962 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.22.0 // indirect
@@ -338,6 +339,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.28.6 // indirect
 	github.com/aws/smithy-go v1.20.2 // indirect
 	github.com/axiomhq/hyperloglog v0.0.0-20240124082744-24bca3a5b39b // indirect
+	github.com/bboreham/go-loser v0.0.0-20230920113527-fcc2c21820a3 // indirect
 	github.com/beevik/ntp v1.3.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/c2h5oh/datasize v0.0.0-20220606134207-859f65c6625b // indirect
@@ -352,7 +354,7 @@ require (
 	github.com/cloudflare/circl v1.3.7 // indirect
 	github.com/cloudflare/golz4 v0.0.0-20150217214814-ef862a3cdc58 // indirect
 	github.com/cncf/xds/go v0.0.0-20231128003011-0fa0005c9caa // indirect
-	github.com/containerd/cgroups/v3 v3.0.2 // indirect
+	github.com/containerd/cgroups/v3 v3.0.3 // indirect
 	github.com/containerd/console v1.0.3 // indirect
 	github.com/containerd/containerd v1.7.12 // indirect
 	github.com/containerd/continuity v0.4.2 // indirect
@@ -405,16 +407,16 @@ require (
 	github.com/go-logr/logr v1.4.1 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
-	github.com/go-openapi/analysis v0.21.4 // indirect
-	github.com/go-openapi/errors v0.20.4 // indirect
+	github.com/go-openapi/analysis v0.22.2 // indirect
+	github.com/go-openapi/errors v0.21.1 // indirect
 	github.com/go-openapi/jsonpointer v0.20.2 // indirect
 	github.com/go-openapi/jsonreference v0.20.4 // indirect
-	github.com/go-openapi/loads v0.21.2 // indirect
-	github.com/go-openapi/runtime v0.26.0 // indirect
-	github.com/go-openapi/spec v0.20.9 // indirect
-	github.com/go-openapi/strfmt v0.21.7 // indirect
+	github.com/go-openapi/loads v0.21.5 // indirect
+	github.com/go-openapi/runtime v0.27.1 // indirect
+	github.com/go-openapi/spec v0.20.14 // indirect
+	github.com/go-openapi/strfmt v0.22.2 // indirect
 	github.com/go-openapi/swag v0.22.9 // indirect
-	github.com/go-openapi/validate v0.22.1 // indirect
+	github.com/go-openapi/validate v0.23.0 // indirect
 	github.com/go-redis/redis/v8 v8.11.5 // indirect
 	github.com/go-resty/resty/v2 v2.11.0 // indirect
 	github.com/go-viper/mapstructure/v2 v2.0.0-alpha.1 // indirect
@@ -460,7 +462,7 @@ require (
 	github.com/hashicorp/go-secure-stdlib/awsutil v0.1.6 // indirect
 	github.com/hashicorp/go-secure-stdlib/parseutil v0.1.6 // indirect
 	github.com/hashicorp/go-secure-stdlib/strutil v0.1.2 // indirect
-	github.com/hashicorp/go-sockaddr v1.0.2 // indirect
+	github.com/hashicorp/go-sockaddr v1.0.6 // indirect
 	github.com/hashicorp/go-uuid v1.0.3 // indirect
 	github.com/hashicorp/go-version v1.6.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
@@ -585,7 +587,7 @@ require (
 	github.com/power-devops/perfstat v0.0.0-20220216144756-c35f1ee13d7c // indirect
 	github.com/prometheus-community/go-runit v0.1.0 // indirect
 	github.com/prometheus-community/prom-label-proxy v0.6.0 // indirect
-	github.com/prometheus/alertmanager v0.26.0 // indirect
+	github.com/prometheus/alertmanager v0.27.0 // indirect
 	github.com/prometheus/exporter-toolkit v0.11.0 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
 	github.com/relvacode/iso8601 v1.4.0 // indirect
@@ -649,7 +651,7 @@ require (
 	go.etcd.io/etcd/api/v3 v3.5.10 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.5.10 // indirect
 	go.etcd.io/etcd/client/v3 v3.5.10 // indirect
-	go.mongodb.org/mongo-driver v1.12.0 // indirect
+	go.mongodb.org/mongo-driver v1.14.0 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/collector/config/internal v0.99.0 // indirect
 	go.opentelemetry.io/collector/confmap/provider/envprovider v0.99.0 // indirect
@@ -708,15 +710,6 @@ replace (
 	// Prometheus uses v3.3.0, but we will get a compilation error from another module if we use it.
 	k8s.io/klog/v2 => github.com/simonpasquier/klog-gokit/v3 v3.4.0
 )
-
-// TODO(marctc): remove replace directive once:
-//
-// * There is a release of Prometheus which contains
-// prometheus/prometheus#13002
-// and prometheus/prometheus#13497
-// We use the last v1-related tag as the replace statement does not work for v2
-// tags without the v2 suffix to the module root.
-replace github.com/prometheus/prometheus => github.com/grafana/prometheus v1.8.2-0.20240130142130-51b39f24d406 // cmp_header_order branch
 
 replace gopkg.in/yaml.v2 => github.com/rfratto/go-yaml v0.0.0-20211119180816-77389c3526dc
 
